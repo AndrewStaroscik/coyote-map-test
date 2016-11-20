@@ -86,22 +86,35 @@
     }
 
     #topregion {
-      margin: 10px;
-      padding: 5px;
-      background: #dddd11;
-      border-radius: 10px;
+      margin: 12px;
+      padding: 25px;
+      background: #ffff11;
+      font-size: 2em;
+      border-radius: 30px;
       
     }
+
+
+    .noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
 </style>
 
 <body> 
   <div id='wrapper'> 
-    <div id="topregion">Get Location</div>
+    <div id="topregion" class='noselect'>Get Location</div>
     <div id="mapdiv"></div>
     <div id="reporterdiv"></div>
   </div>  
-    <script src="https://d3js.org/d3.v3.min.js"></script>
-    <script src="https://d3js.org/d3.geo.tile.v0.min.js"></script>
+    <script src="./lib/d3.v3.min.js"></script>
+    <script src="./lib/d3.geo.tile.v0.min.js"></script>
 
     <script>
 
@@ -377,7 +390,17 @@
         }
       });      
 
+      markButton.addEventListener('touchstart', function() {
+        
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(reportPosition);
+        } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      });   
+
       function reportPosition(pos) {
+        window.alert(pos.coords.latitude);
         x.innerHTML = "Latitude: " + pos.coords.latitude + "<br>Longitude: " + pos.coords.longitude; 
 
         addPoint(pos);
