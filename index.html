@@ -88,8 +88,10 @@
     #topregion {
       margin: 12px;
       padding: 25px;
-      background: #ffff11;
+      background: #000099;
+      color: #ddd;
       font-size: 2em;
+      border: 1px solid #232323;
       border-radius: 30px;
       
     }
@@ -382,7 +384,7 @@
       var x = document.getElementById('reporterdiv');
       
       markButton.addEventListener('click', function() {
-        console.log('click');
+        
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(reportPosition);
         } else {
@@ -400,7 +402,7 @@
       });   
 
       function reportPosition(pos) {
-        window.alert(pos.coords.latitude);
+        
         x.innerHTML = "Latitude: " + pos.coords.latitude + "<br>Longitude: " + pos.coords.longitude; 
 
         addPoint(pos);
